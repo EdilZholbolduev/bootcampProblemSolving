@@ -20,17 +20,21 @@ body {
     font-size: 20px;
     cursor: pointer;
     border: 1px solid orange;
-    background: black;
+    background: #862B0D;
     color: orange;
 }
 
 .btn:hover {
-    background: #414349;
+    background: #F79300;
+    color: #fff;
+    transition:0.3s;
 }
 
 .btn:active {
-    background: #56585D;
+    background: #862B0D;
     border: 2px solid orange;
+    color:orange;
+    transition: 0.1s;
 }
 
 a {
@@ -44,25 +48,34 @@ li {
 h1 {
     text-align: center;
     font-size: 70px;
-    color: white;
+    color: #fff;
     margin: 0 auto;
     text-transform: uppercase;
     font-weight: 600;
+    background-color: #7A9D54;
+    border-radius: 20px;
 }
 
 h2 {
     text-align: center;
     font-size: 30px;
-    color: white;
+    color: #fff;
     margin: 0 auto;
     text-transform: uppercase;
     font-weight: 600;
+}
+h2:hover{
+    color:#F79300;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    transition: 0.3s;
 }
 
 h3 {
     text-align: center;
     font-size: 30px;
-    color: white;
+    color: #7D7463;
     margin: 0 auto;
     text-transform: uppercase;
     font-weight: 600;
@@ -70,7 +83,7 @@ h3 {
 
 h4 {
     font-size: 24px;
-    color: white;
+    color: #7D7463;
     text-transform: uppercase;
     font-weight: 600;
 }
@@ -95,7 +108,7 @@ input {
 }
 
 .checker {
-    color: white;
+    color: #7D7463;
     font-size: 30px;
 }
 
@@ -110,11 +123,12 @@ input {
     border-radius: 50%;
     font-weight: 800;
     z-index: 1;
+    border: 1px solid orange
 }
 
 .btn-slide:hover {
     background: #b68733 !important;
     cursor: pointer;
-    color: white;
+    color: #fff;
 }
 

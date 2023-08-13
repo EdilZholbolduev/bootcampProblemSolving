@@ -16,6 +16,7 @@ let result = document.querySelector('#gmail_result')
 //    } 
 // }
 
+// homework (part 2)
 btn.addEventListener('click', ()=>{
    let inputEmail = input.value.trim()
 
@@ -36,21 +37,36 @@ function checkEmail(email){
    let regExp = /^[0-9a-zA-Z._%+-]+@gmail\.com$/
    return regExp.test(email)
 }
-// homework (part 2)
 let parentBlock = document.querySelector('.parent_block')
 let childBlock = document.querySelector('.child_block')
 
-let blockPlace = 0 
-let go = 2
+let positionX = 0
+let positionY = 0
 
-let moves = () =>{
-   blockPlace += go 
-   childBlock.style.left = `${blockPlace}px`
-
-   if(blockPlace < parentBlock.clientWidth - childBlock.clientWidth){
-      requestAnimationFrame(moves)
+let moves =()=>{
+   if(positionX < 447 && positionY === 0){
+      positionX++
+      childBlock.style.left = `${positionX}px`
+      setTimeout(moves, 2)
+   }else if(positionX >= 447 && positionY < 447){
+      positionY++
+      childBlock.style.top =`${positionY}px`
+      setTimeout(moves, 2)
+   }else if (positionX >= 0 && positionY >= 447){
+      positionX--
+      childBlock.style.left =`${positionX}px`
+      setTimeout(moves, 2)
+   }else if(positionX <= 447 && positionY >0){
+      positionY--
+      childBlock.style.top =`${positionY}px`
+      setTimeout(moves, 2)
    }
-   
+
 }
 moves()
- 
+
+// HOMEWORK 2
+
+let start = document.querySelector('#start')
+let stop = document.querySelector('#stop')
+let reset = document.querySelector('#reset')
