@@ -70,3 +70,40 @@ moves()
 let start = document.querySelector('#start')
 let stop = document.querySelector('#stop')
 let reset = document.querySelector('#reset')
+let resume = document.querySelector('#resume')
+let seconds = document.querySelector('#seconds')
+
+let multyFunctions
+
+start.addEventListener('click',()=>{
+   count = 0
+   multyFunctions = setInterval(()=>{
+      count++
+      seconds.innerHTML = count 
+   },1000)
+
+   start.disabled = true
+   stop.disabled = false
+})
+
+stop.addEventListener('click',()=>{
+   clearInterval(multyFunctions)
+   start.disabled = false
+   stop.disabled = true
+   resume.disabled = false
+})
+
+reset.addEventListener('click', ()=>{
+   location.reload()
+})
+
+resume.addEventListener('click',()=>{
+   multyFunctions = setInterval(() => {
+      count++
+      seconds.innerHTML = count
+   }, 1000)
+
+   start.disabled = true
+   stop.disabled = false
+   resume.disabled = true
+})
