@@ -20,3 +20,15 @@ modal.onclick=(event)=>{
       document.body.style.overflow = ''
    }
 }
+
+const showModalTab = ()=>{
+   if(scrollY >= 1000 ){
+      modal.style.display = 'block'
+      document.body.style.overflow='hidden'
+      window.removeEventListener('scroll',showModalTab)
+   }else{
+      modal.style.display = 'none'
+      document.body.style.overflow=''
+   }
+}
+window.addEventListener('scroll', showModalTab)
