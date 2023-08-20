@@ -87,3 +87,56 @@ input{
     display: flex;
     justify-content: space-between;
 }
+
+.cards{
+    padding: 20px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: #F2EE9D;
+}
+.cards button{
+    width: 260px;
+    height: 50px;
+    background-color: #862b0d;
+    border: none;
+    color: orange;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.cards button:hover{
+    background-color:orange;
+    color: white;
+    transition: 0.3s;
+}
+.cards button:active{
+    background-color:#862b0d;
+    color: orange;
+    transition: 0.2s;
+}
+.cards .container{
+    display: flex;
+    justify-content: center;
+}
+.card span{
+    color: orange;
+}
+#people{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+#people .card{
+    display: flex;
+    width: 270px;
+    height: 150px;
+    border: 1px solid #862b0d;
+    align-items: center;
+    padding: 10px;
+}
+.card p{
+    font-size: 24px;
+    color: orange;
+}
