@@ -22,7 +22,7 @@ modal.onclick=(event)=>{
 }
 
 const showModalTab = ()=>{
-   if(scrollY >= 1000 ){
+   if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
       modal.style.display = 'block'
       document.body.style.overflow='hidden'
       window.removeEventListener('scroll',showModalTab)

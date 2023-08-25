@@ -58,3 +58,50 @@ const autoSlide =(i=0)=>{
 },3000)
 }
 autoSlide()
+
+// converter 
+const som = document.querySelector('#som')
+const usd = document.querySelector('#usd')
+const eur = document.querySelector('#eur')
+
+// som.addEventListener('input',()=>{
+//    const request = new XMLHttpRequest()
+//    request.open('GET','../converter.json')
+//    request.setRequestHeader('Content-type','application/json')
+//    request.send()
+
+//    request.addEventListener('load',()=>{
+//       const data = JSON.parse(request.response)
+//       usd.value = (som.value / data.usd).toFixed(2)
+//       euro.value = (som.value / data.euro).toFixed(2)
+//    })
+// })
+
+const converter = (element, target, euro, isTrue)=>{
+   element.oninput=()=>{
+      const request = new XMLHttpRequest()
+      request.open('GET','../converter.json')
+      request.setRequestHeader('Content-type','application/json')
+      request.send()
+
+      request.onload=()=>{
+         const data = JSON.parse(request.response)
+         if(isTrue){
+            target.value = (element.value / data.usd).toFixed(2)
+            euro.value = (element.value / data.euro).toFixed(2)
+         }else{
+            target.value = (element.value * data.usd).toFixed(2)
+         }
+         element.value === ''&& (target.value ='')
+         element.value === ''&& (euro.value ='')
+      }
+   }
+}
+converter(som,usd,eur,true)
+converter(usd,som,eur,false)
+converter(eur,som,usd,false)
+
+
+      
+
+
