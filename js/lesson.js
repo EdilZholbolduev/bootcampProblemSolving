@@ -101,6 +101,66 @@ converter(som,usd,eur,true)
 converter(usd,som,eur,false)
 converter(eur,som,usd,false)
 
+// fetch request
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response)=>response.json())
+    .then((data)=>console.log(data))
+
+// card switcher
+const btnPrev = document.querySelector('#btn-prev')
+const btnNext = document.querySelector('#btn-next')
+const card = document.querySelector('.card')
+let count = 0
+
+let cardSwitcher =()=>{
+fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
+   .then((response)=>response.json())
+   .then((data)=>{
+      card.innerHTML=`
+      <p>${data.title}</p>
+      <p>${data.completed}</p>
+      <span>${data.id}</span>
+      `
+   })
+   if(count > 200){
+      count = 0
+   }else if(count < 1){
+      count = 201
+   }
+   
+}
+
+btnNext.onclick=()=>{
+   count++
+   cardSwitcher()
+}
+btnPrev.onclick=()=>{
+   count--
+   cardSwitcher()
+}
+
+
+// btnNext.onclick=()=>{
+//    count++
+//    fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
+//    .then((response)=>response.json())
+//    .then((data)=>{
+//       card.innerHTML=`
+//       <p>${data.title}</p>
+//       <p>${data.completed}</p>
+//       <span>${data.id}</span>
+//       `
+//    })
+//    if(count >= 200){
+//       count = 0 
+//    }else{
+//       count++
+//    }
+   
+// }
+
+
 
       
 
