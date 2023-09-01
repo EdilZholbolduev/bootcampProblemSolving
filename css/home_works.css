@@ -1,4 +1,10 @@
-
+.inner_header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+}
 /* GMAIL BLOCK */
 
 .gmail_block {
@@ -40,7 +46,7 @@ input{
 .parent_block {
     height: 500px;
     width: 500px;
-    border: 2px solid orange;
+    border: 2px solid red;
     position: relative;
     margin: 0 auto;
 }
@@ -49,8 +55,8 @@ input{
     position: absolute;
     width: 50px;
     height: 50px;
-    background: red;
     border-radius: 50%;
+    border: dotted 4px rgb(0, 64, 255);
 }
 
 .inner_move_block {
@@ -130,13 +136,26 @@ input{
 }
 #people .card{
     display: flex;
-    width: 270px;
+    width: 370px;
     height: 150px;
     border: 1px solid #862b0d;
     align-items: center;
     padding: 10px;
 }
+
 .card p{
     font-size: 24px;
     color: orange;
+}
+.card:hover{
+    cursor: pointer;
+    background-color:#862b0d;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+.card:active{
+    cursor: pointer;
+    background-color:#F2EE9D;
+    border-radius: 25%;
+    transition: 0.1s;
 }

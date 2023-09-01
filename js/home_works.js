@@ -40,6 +40,7 @@ function checkEmail(email){
 let parentBlock = document.querySelector('.parent_block')
 let childBlock = document.querySelector('.child_block')
 
+
 let positionX = 0
 let positionY = 0
 
@@ -64,7 +65,6 @@ let moves =()=>{
 
 }
 moves()
-
 // HOMEWORK 2
 
 let start = document.querySelector('#start')
@@ -110,47 +110,45 @@ resume.addEventListener('click',()=>{
 // working with JSON file (practive json)
 const btnJson = document.querySelector('#btn-json')
 // part one
-btnJson.addEventListener('click',()=>{
-   const request = new XMLHttpRequest()
-   request.open("GET","../data.json")
-   request.setRequestHeader("Content-type","application/json")
-   request.send()
-   // part two(in part one we have an asynchronous, that's why we need give load make second part also asynchronous)
-   request.addEventListener('load',()=>{
-      const data = JSON.parse (request.response)
+btnJson.addEventListener('click', async ()=>{
+   const response = await fetch ('../data.json')
+   const data = await response.json()
+   try{
+      
       document.querySelector('.my-name').innerHTML = data.name
       document.querySelector('.my-age').innerHTML = data.age
-   })
+   }catch{
+      console.error('error')
+   }
+   
 })
 
 // people (json)
 const btnPeople = document.querySelector('.btn-json')
 const peopleContainer = document.querySelector('#people')
 
-function dataPeople(){ 
-const people = new XMLHttpRequest()
-people.open("GET","../people.json")
-people.setRequestHeader("Content-type","application/json")
-people.send()
-people.addEventListener('load',()=>{
-   const data2 =  JSON.parse (people.response)
-   data2.forEach((person)=>{
-      const div = document.createElement('div')
-      div.classList.add('card')
-      peopleContainer.appendChild(div)
-      div.innerHTML = `
-      <p>Worker:</p>
-      <h3>${person.name}</h3>
-      <h3>${person.age}</h3>
-      `
-btnPeople.removeEventListener('click', btnPeople)
-   })
-   btnPeople.removeEventListener('click',dataPeople
-   )
-})
-}
-btnPeople.addEventListener('click', dataPeople)
+const fetchData = async () => {
+  try {
+    const response = await fetch('../people.json')
+    const data = await response.json()
 
-fetch('https://jsonplaceholder.typicode.com/posts')
-    .then((response)=>response.json())
-    .then((data)=>console.log(data))
+    if (btnPeople) {
+      data.forEach((person) => {
+        const div = document.createElement('div')
+        div.classList.add('card')
+        peopleContainer.appendChild(div)
+        div.innerHTML = `
+          <p>Worker:</p>
+          <h3>${person.name}</h3>
+          <h3>${person.age}</h3>
+        `
+      })
+
+      btnPeople.removeEventListener('click', fetchData)
+    }
+  } catch (error) {
+    console.error(error, 'error')
+  }
+}
+
+btnPeople.addEventListener('click', fetchData)

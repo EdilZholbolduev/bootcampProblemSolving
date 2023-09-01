@@ -78,14 +78,10 @@ const eur = document.querySelector('#eur')
 // })
 
 const converter = (element, target, euro, isTrue)=>{
-   element.oninput=()=>{
-      const request = new XMLHttpRequest()
-      request.open('GET','../converter.json')
-      request.setRequestHeader('Content-type','application/json')
-      request.send()
-
-      request.onload=()=>{
-         const data = JSON.parse(request.response)
+   element.oninput= async ()=>{
+      try{ 
+         const response = await fetch('../converter.json')
+         const data = await response.json()
          if(isTrue){
             target.value = (element.value / data.usd).toFixed(2)
             euro.value = (element.value / data.euro).toFixed(2)
@@ -94,49 +90,58 @@ const converter = (element, target, euro, isTrue)=>{
          }
          element.value === ''&& (target.value ='')
          element.value === ''&& (euro.value ='')
-      }
+      }catch(e){
+      console.error(e,'error')
+   }
    }
 }
+
 converter(som,usd,eur,true)
 converter(usd,som,eur,false)
 converter(eur,som,usd,false)
 
 // fetch request
-
-fetch('https://jsonplaceholder.typicode.com/posts')
-    .then((response)=>response.json())
-    .then((data)=>console.log(data))
-
+const fun1 = async ()=>{
+   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+   const data = response.json()
+   console.log(data)
+}
+fun1()
 // card switcher
 const btnPrev = document.querySelector('#btn-prev')
 const btnNext = document.querySelector('#btn-next')
 const card = document.querySelector('.card')
 let count = 0
 
-let cardSwitcher =()=>{
-fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-   .then((response)=>response.json())
-   .then((data)=>{
+let cardSwitcher = async ()=>{
+const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
+const data = await response.json()
+   try{
       card.innerHTML=`
       <p>${data.title}</p>
       <p>${data.completed}</p>
       <span>${data.id}</span>
       `
-   })
-   if(count > 200){
-      count = 0
-   }else if(count < 1){
-      count = 201
+   }catch(error){
+      console.error(error,'error')
    }
-   
 }
-
 btnNext.onclick=()=>{
-   count++
+   if(count<200){
+      count++
+   }else{
+      count = 1
+   }
+   // count < 200 ? count++ : count = 1
    cardSwitcher()
 }
 btnPrev.onclick=()=>{
-   count--
+   if(count>1){
+      count--
+   }else{
+      count = 200
+   }
+   // count > 1 ? count-- : count = 200
    cardSwitcher()
 }
 
@@ -161,6 +166,27 @@ btnPrev.onclick=()=>{
 // }
 
 
+// Weather API
+
+const input = document.querySelector('.cityName')
+const city = document.querySelector('.city')
+const temp = document.querySelector('.temp')
+const keyWeather = 'e417df62e04d3b1b111abeab19cea714'
+
+
+const citySearch =()=>{
+   input.oninput= async (event)=>{
+      
+   const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${event.target.value}&appid=${keyWeather}`)
+   const data = await response.json()
+      
+      city.innerHTML = data?.name ? data?.name : "We dont have such a city"
+      temp.innerHTML = data?.main?.temp ? Math.round(data?.main?.temp - 273) + "&deg;C" : 'WRONG'
+
+}
+}
+
+citySearch()
 
       
 

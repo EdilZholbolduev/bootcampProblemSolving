@@ -3,6 +3,13 @@ input{
     background-color: #F2EE9D;
     outline: none;
 }
+.inner_header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+}
 /* PHONE CHECKER */
 
 .phone_block {
